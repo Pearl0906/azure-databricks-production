@@ -134,36 +134,6 @@ variable "sql_warehouse_no_wait" {
   type        = bool
 }
 
-module "sql_warehouse_permissions" {
-  source = "./modules/sql_warehouse_permissions"
-
-  sql_warehouse_id = module.sql_warehouse.id
-  principal        = var.sql_warehouse_permission_principal
-  permission_level = var.sql_warehouse_permission_level
-}
-
-variable "sql_warehouse_permission_principal" {
-  description = "Databricks user or group that receives SQL Warehouse access"
-  type        = string
-}
-
-variable "sql_warehouse_permission_level" {
-  description = "Permission level granted on the SQL Warehouse"
-  type        = string
-
-  validation {
-    condition = contains(
-      [
-        "CAN_USE",
-        "CAN_MANAGE",
-        "CAN_MONITOR"
-      ],
-      var.sql_warehouse_permission_level
-    )
-
-    error_message = "Permission level must be CAN_USE, CAN_MANAGE, or CAN_MONITOR."
-  }
-}
 
 variable "databricks_job_name" {
   description = "Name of the Databricks data engineering job."
@@ -261,29 +231,6 @@ variable "gold_notebook_path" {
   type        = string
 }
 
-variable "databricks_job_permission_principal" {
-  description = "Databricks user or group receiving Job permissions."
-  type        = string
-}
-
-variable "databricks_job_permission_level" {
-  description = "Permission level granted on the Databricks Job."
-  type        = string
-
-  validation {
-    condition = contains(
-      [
-        "CAN_VIEW",
-        "CAN_MANAGE_RUN",
-        "CAN_MANAGE"
-      ],
-      var.databricks_job_permission_level
-    )
-
-    error_message = "Job permission level must be CAN_VIEW, CAN_MANAGE_RUN, or CAN_MANAGE."
-  }
-}
-
 variable "databricks_job_notification_email" {
   description = "Email address that receives Databricks Job notifications."
   type        = string
@@ -311,4 +258,22 @@ variable "databricks_job_notify_on_duration_warning" {
   description = "Whether to notify when the Databricks Job exceeds its duration warning threshold."
   type        = bool
   default     = false
+}
+
+variable "databricks_auth_type" {
+  description = "Databricks authentication method."
+  type        = string
+  default     = "azure-cli"
+}
+
+variable "databricks_azure_client_id" {
+  description = "Azure client ID used for Databricks authentication."
+  type        = string
+  default     = null
+}
+
+variable "databricks_azure_tenant_id" {
+  description = "Azure tenant ID used for Databricks authentication."
+  type        = string
+  default     = null
 }

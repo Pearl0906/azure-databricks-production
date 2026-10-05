@@ -19,4 +19,8 @@ provider "azurerm" {
 provider "databricks" {
   host                        = "https://${module.databricks_workspace.workspace_url}"
   azure_workspace_resource_id = module.databricks_workspace.resource_id
+
+  auth_type       = var.databricks_auth_type
+  azure_client_id = var.databricks_azure_client_id
+  azure_tenant_id = var.databricks_azure_tenant_id
 }

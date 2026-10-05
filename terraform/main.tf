@@ -168,28 +168,28 @@ module "databricks_job" {
   tags = var.tags
 
   tasks = [
-   {
+    {
       task_key      = "bronze"
       notebook_path = var.bronze_notebook_path
     },
-   {
+    {
       task_key      = "gold"
-     notebook_path = var.gold_notebook_path
+      notebook_path = var.gold_notebook_path
       depends_on    = ["silver"]
     },
     {
       task_key      = "silver"
-     notebook_path = var.silver_notebook_path
+      notebook_path = var.silver_notebook_path
       depends_on    = ["bronze"]
-   }
+    }
   ]
 }
 
-module "databricks_job_permissions" {
-  source = "./modules/databricks_job_permissions"
+module "github_service_principal" {
+  source = "./modules/github_service_principal"
 
-  job_id           = module.databricks_job.id
-  principal        = var.databricks_job_permission_principal
-  permission_level = var.databricks_job_permission_level
-
+  application_id = "add0cf5f-8152-4961-a46d-355871093d77"
+  display_name   = "sp-github-azure-databricks"
+  group_id       = "2123915635980848"
 }
+

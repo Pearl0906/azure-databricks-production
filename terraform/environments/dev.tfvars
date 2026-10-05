@@ -43,8 +43,6 @@ sql_warehouse_channel_name = "CHANNEL_NAME_CURRENT"
 
 sql_warehouse_no_wait = false
 
-sql_warehouse_permission_principal = "shungubepss@gmail.com"
-sql_warehouse_permission_level     = "CAN_MANAGE"
 
 # ============================================================
 # Databricks Job
@@ -84,8 +82,6 @@ gold_notebook_path   = "/Shared/azure-databricks-production/gold"
 # Databricks Job Permissions
 # ============================================================
 
-databricks_job_permission_principal = "shungubepss@gmail.com"
-databricks_job_permission_level     = "CAN_MANAGE"
 
 # ============================================================
 # Databricks Job Monitoring
@@ -97,3 +93,4 @@ databricks_job_notify_on_start            = false
 databricks_job_notify_on_success          = true
 databricks_job_notify_on_failure          = true
 databricks_job_notify_on_duration_warning = false
+

@@ -53,12 +53,3 @@ output "databricks_job_url" {
   value       = module.databricks_job.url
 }
 
-output "databricks_job_permission_principal" {
-  description = "Principal receiving Databricks Job permissions."
-  value       = module.databricks_job_permissions.principal
-}
-
-output "databricks_job_permission_level" {
-  description = "Permission level granted on the Databricks Job."
-  value       = module.databricks_job_permissions.permission_level
-}
